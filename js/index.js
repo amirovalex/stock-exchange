@@ -1,7 +1,4 @@
-const button = document.getElementById("searchButton");
-const input = document.getElementsByTagName("input")[0];
-const resultsList = document.getElementsByClassName("results-list")[0];
-const spinner = document.getElementById("loading");
+import { button, input, resultsList, spinner, urlParams } from "./constants.js";
 
 const clearResults = (childrenNum) => {
   for (let i = 0; i < childrenNum - 1; i++) {
@@ -48,4 +45,11 @@ const onSearchCallAsync = async (query) => {
 button.addEventListener("click", async (e) => {
   const response = await onSearchCallAsync(input.value);
   return response;
+});
+
+input.addEventListener("keydown", async (e) => {
+  if (e.keyCode === 13) {
+    const response = await onSearchCallAsync(input.value);
+    return response;
+  }
 });
