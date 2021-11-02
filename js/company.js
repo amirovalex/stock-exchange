@@ -9,12 +9,13 @@ const companyName = document.getElementsByClassName("companyName")[0];
 const companyDescription =
   document.getElementsByClassName("companyDescription")[0];
 const companyLink = document.getElementsByClassName("companyLink")[0];
+const companyPrice = document.getElementsByClassName("companyPrice")[0];
 const companyInfoWithChart = document.getElementsByClassName(
   "companyInfoWithChart"
 )[0];
 const spinnerCompany = document.getElementById("loadingCompany");
 
-const updateCompanyInfo = (logo, name, description, link) => {
+const updateCompanyInfo = (logo, name, description, link, price) => {
   try {
     companyLogo.src = logo;
     companyName.innerText = name;
@@ -22,15 +23,42 @@ const updateCompanyInfo = (logo, name, description, link) => {
     companyLink.href = link;
   } catch (err) {
     console.log(err);
-    // companyLogo.src =
-    //   "https://media.istockphoto.com/photos/abstract-financial-graph-with-up-trend-line-candlestick-chart-in-on-picture-id1262836699?k=20&m=1262836699&s=612x612&w=0&h=tx7vjNHhBjIRX76Xa80cm8jk9eXiXZoEJP2hgotTNXE=";
+  }
+};
+
+const updateCompanyPrice = (previousClose, stockPrice) => {
+  const stockGrowth = (
+    ((previousClose - stockPrice) / previousClose) *
+    100
+  ).toString();
+  console.log(stockGrowth);
+  const stockGrowthSpan = document.createElement("span");
+  companyPrice.innerText = stockPrice;
+  stockGrowthSpan.innerText = `${
+    previousClose > stockPrice
+      ? `(-${stockGrowth.slice(0, 4)}%)`
+      : `(${stockGrowth.slice(0, 4)}%)`
+  }`;
+  console.log(stockGrowthSpan);
+  companyPrice.appendChild(stockGrowthSpan);
+
+  if (previousClose > stockPrice) {
+    stockGrowthSpan.classList.remove("red");
+    stockGrowthSpan.classList.add("green");
+  }
+  if (previousClose < stockPrice) {
+    stockGrowthSpan.classList.remove("green");
+    stockGrowthSpan.classList.add("red");
   }
 };
 
 const updateCompanyChart = (companyHistory) => {
-  let minPrice = 0;
-  let maxPrice = 0;
-  let startingYear;
+  updateCompanyPrice(
+    companyHistory.historical[1].close,
+    companyHistory.historical[0].close
+  );
+  console.log(companyHistory.historical);
+
   const sortPerDays = 5;
   let tempArr = [];
   const historyLength = companyHistory.historical.length;
@@ -52,8 +80,6 @@ const updateCompanyChart = (companyHistory) => {
   tempArr.map(() => {
     labels.push();
   });
-  console.log(labels);
-  console.log(closedPrices);
   const data = {
     labels: labels,
     datasets: [
@@ -80,6 +106,7 @@ const fetchCompanyHistory = async (symbol) => {
       `https://stock-exchange-dot-full-stack-course-services.ew.r.appspot.com/api/v3/historical-price-full/${symbol}?serietype=line`
     );
     const data = await response.json();
+    console.log(data);
     updateCompanyChart(data);
   } catch (err) {
     console.log(err);
