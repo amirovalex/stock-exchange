@@ -31,7 +31,7 @@ const classChangesOnSearchFinish = () => {
 };
 
 const addLogoToSearchItem = (logo, stock) => {
-  console.log("logo", stock);
+  // console.log("logo", stock);
   const companyLogo = document.createElement("img");
   companyLogo.src = logo;
   companyLogo.height = "50";
@@ -42,7 +42,7 @@ const addLogoToSearchItem = (logo, stock) => {
 
 const addGrowthToSearchItem = (info) => {
   const companyPriceRise = document.createElement("span");
-  console.log("growth", info);
+  // console.log("growth", info);
   const previousClose = info.historical[1].close;
   const stockPrice = info.historical[0].close;
   const stockGrowth = checkGrowthPercentage(previousClose, stockPrice);
@@ -67,11 +67,10 @@ const onSearchCallAsync = async (query) => {
       `https://stock-exchange-dot-full-stack-course-services.ew.r.appspot.com/api/v3/search?query=${query}&limit=10&exchange=NASDAQ`
     );
     const data = await response.json();
-    console.log(data);
     data.map(async (stock) => {
-      console.log("stock symbol", stock.symbol);
+      // console.log("stock symbol", stock.symbol);
       const fetchedInfoData = await fetchCompanyInfo(stock.symbol, false);
-      console.log("fetched  data", fetchedInfoData);
+      // console.log("fetched  data", fetchedInfoData);
       let logoImage;
       const fetchedHistoryData = await fetchCompanyHistory(stock.symbol, false);
       if (Object.keys(fetchedInfoData).length !== 0) {
