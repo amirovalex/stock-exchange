@@ -147,7 +147,7 @@ exchange-dot-full-stack-course-services.ew.r.appspot.com/api/v3/company/profile/
       );
       fetchCompanyHistory(symbol);
     }
-    console.log("data inside company", data);
+    // console.log("data inside company", data);
     return data;
   } catch (err) {
     console.log(err);
