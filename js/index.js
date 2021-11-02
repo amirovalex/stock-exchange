@@ -1,4 +1,4 @@
-import { button, input, resultsList, spinner, urlParams } from "./constants.js";
+import { button, input, resultsList, spinner } from "./constants.js";
 
 const clearResults = (childrenNum) => {
   for (let i = 0; i < childrenNum - 1; i++) {
