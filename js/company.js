@@ -81,18 +81,29 @@ const updateCompanyChart = (companyHistory) => {
     labels: labels,
     datasets: [
       {
-        label: `${companySymbol} Stock Prices`,
+        label: `${companySymbol}`,
         backgroundColor: "rgb(255, 99, 132)",
         borderColor: "rgb(255, 99, 132)",
         data: closedPrices,
       },
     ],
   };
-
+  tempArr.reverse();
   const config = {
     type: "line",
     data: data,
-    options: {},
+    options: {
+      plugins: {
+        tooltip: {
+          callbacks: {
+            label: (context) => {
+              console.log(context);
+              return `${context.raw}$ ${tempArr[context.dataIndex].date}`;
+            },
+          },
+        },
+      },
+    },
   };
   const myChart = new Chart(document.getElementById("myChart"), config);
 };
