@@ -1,4 +1,5 @@
 const urlParams = new URLSearchParams(window.location.search);
+console.log(urlParams.toString());
 const selectedCompany = urlParams.toString();
 const companySymbol = selectedCompany.slice(
   selectedCompany.indexOf("=") + 1,
@@ -26,11 +27,15 @@ const updateCompanyInfo = (logo, name, description, link, price) => {
   }
 };
 
-const updateCompanyPrice = (previousClose, stockPrice) => {
+export const checkGrowthPercentage = (previousClose, stockPrice) => {
   const stockGrowth = (
     ((previousClose - stockPrice) / previousClose) *
     100
   ).toString();
+  return stockGrowth;
+};
+const updateCompanyPrice = (previousClose, stockPrice) => {
+  const stockGrowth = checkGrowthPercentage(previousClose, stockPrice);
   const stockGrowthSpan = document.createElement("span");
   companyPrice.innerText = stockPrice;
   stockGrowthSpan.innerText = `${
@@ -58,6 +63,8 @@ const updateCompanyChart = (companyHistory) => {
 
   const sortPerDays = 5;
   let tempArr = [];
+  const labels = [];
+  const closedPrices = [];
   const historyLength = companyHistory.historical.length;
   const companyHistoryDates = companyHistory.historical;
   for (let i = 0; i < historyLength; i += sortPerDays) {
@@ -66,8 +73,6 @@ const updateCompanyChart = (companyHistory) => {
       tempArr.push(companyHistoryDates[companyHistoryDates.length - 1]);
     }
   }
-  const labels = [];
-  const closedPrices = [];
   for (let i = tempArr.length - 1; i >= 0; i--) {
     labels.push(
       new Date(tempArr[i].date).toLocaleString("default", { month: "long" })
@@ -97,7 +102,6 @@ const updateCompanyChart = (companyHistory) => {
         tooltip: {
           callbacks: {
             label: (context) => {
-              console.log(context);
               return `${context.raw}$ ${tempArr[context.dataIndex].date}`;
             },
           },
@@ -108,44 +112,57 @@ const updateCompanyChart = (companyHistory) => {
   const myChart = new Chart(document.getElementById("myChart"), config);
 };
 
-const fetchCompanyHistory = async (symbol) => {
+export const fetchCompanyHistory = async (symbol, onCompany = true) => {
   try {
     const response = await fetch(
       `https://stock-exchange-dot-full-stack-course-services.ew.r.appspot.com/api/v3/historical-price-full/${symbol}?serietype=line`
     );
     const data = await response.json();
-    updateCompanyChart(data);
+    if (onCompany) {
+      updateCompanyChart(data);
+    }
+    return data;
   } catch (err) {
     console.log(err);
   }
 };
 
-const fetchCompanyInfo = async (symbol) => {
+export const fetchCompanyInfo = async (symbol, onCompany = true) => {
   try {
-    companyInfoWithChart.classList.add("d-none");
-    spinnerCompany.classList.remove("d-none");
+    if (companyInfoWithChart) {
+      companyInfoWithChart.classList.add("d-none");
+      spinnerCompany.classList.remove("d-none");
+    }
     const response = await fetch(
       `https://stock-
 exchange-dot-full-stack-course-services.ew.r.appspot.com/api/v3/company/profile/${symbol}`
     );
     const data = await response.json();
-    updateCompanyInfo(
-      data.profile.image,
-      data.profile.companyName,
-      data.profile.description,
-      data.profile.website
-    );
-    fetchCompanyHistory(symbol);
+    if (companyInfoWithChart) {
+      updateCompanyInfo(
+        data.profile.image,
+        data.profile.companyName,
+        data.profile.description,
+        data.profile.website
+      );
+      fetchCompanyHistory(symbol);
+    }
+    console.log("data inside company", data);
+    return data;
   } catch (err) {
     console.log(err);
   } finally {
-    companyInfoWithChart.classList.remove("d-none");
-    spinnerCompany.classList.add("d-none");
+    if (companyInfoWithChart) {
+      companyInfoWithChart.classList.remove("d-none");
+      spinnerCompany.classList.add("d-none");
+    }
   }
 };
 
-const init = async () => {
-  return fetchCompanyInfo(companySymbol);
+const init = () => {
+  if (companyInfoWithChart) {
+    return fetchCompanyInfo(companySymbol);
+  }
 };
 
 init();
