@@ -31,7 +31,6 @@ const updateCompanyPrice = (previousClose, stockPrice) => {
     ((previousClose - stockPrice) / previousClose) *
     100
   ).toString();
-  console.log(stockGrowth);
   const stockGrowthSpan = document.createElement("span");
   companyPrice.innerText = stockPrice;
   stockGrowthSpan.innerText = `${
@@ -39,7 +38,6 @@ const updateCompanyPrice = (previousClose, stockPrice) => {
       ? `(-${stockGrowth.slice(0, 4)}%)`
       : `(${stockGrowth.slice(0, 4)}%)`
   }`;
-  console.log(stockGrowthSpan);
   companyPrice.appendChild(stockGrowthSpan);
 
   if (previousClose > stockPrice) {
@@ -57,7 +55,6 @@ const updateCompanyChart = (companyHistory) => {
     companyHistory.historical[1].close,
     companyHistory.historical[0].close
   );
-  console.log(companyHistory.historical);
 
   const sortPerDays = 5;
   let tempArr = [];
@@ -106,7 +103,6 @@ const fetchCompanyHistory = async (symbol) => {
       `https://stock-exchange-dot-full-stack-course-services.ew.r.appspot.com/api/v3/historical-price-full/${symbol}?serietype=line`
     );
     const data = await response.json();
-    console.log(data);
     updateCompanyChart(data);
   } catch (err) {
     console.log(err);

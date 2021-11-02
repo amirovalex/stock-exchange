@@ -3,6 +3,7 @@ html {
   box-sizing: border-box;
   margin: 0;
   height: 100%;
+  font-family: "Ubuntu Mono", monospace;
 }
 
 *,
