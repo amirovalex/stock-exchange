@@ -1,5 +1,4 @@
 const urlParams = new URLSearchParams(window.location.search);
-console.log(urlParams.toString());
 const selectedCompany = urlParams.toString();
 const companySymbol = selectedCompany.slice(
   selectedCompany.indexOf("=") + 1,

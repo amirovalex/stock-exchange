@@ -1,5 +1,4 @@
 const urlParams = new URLSearchParams(window.location.search);
-console.log(urlParams.toString());
 
 import { button, input, resultsList, spinner } from "./constants.js";
 
