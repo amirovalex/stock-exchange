@@ -57,7 +57,6 @@ html {
 }
 
 .results-list {
-  flex-grow: 1;
   padding: 2rem;
   margin: 0;
   display: flex;
@@ -66,8 +65,8 @@ html {
 }
 
 .result-tile {
+  padding: 1rem;
   list-style-type: none;
-  flex-grow: 1;
   text-decoration: none;
   border-bottom: 1px solid #000;
   display: flex;
