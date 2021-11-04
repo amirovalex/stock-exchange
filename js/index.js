@@ -18,10 +18,12 @@ const classChangesOnSearch = (useStart) => {
     resultsList.classList.remove("p-top-0");
     spinner.classList.remove("d-none");
     resultsList.classList.add("align-center");
+    resultsList.classList.add("flex-grow");
   } else {
     spinner.classList.add("d-none");
     resultsList.classList.remove("align-center");
     resultsList.classList.add("p-top-0");
+    resultsList.classList.remove("flex-grow");
   }
 };
 
