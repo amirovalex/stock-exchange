@@ -133,6 +133,7 @@ const fetchCompanyHistory = async (symbol, onCompany = true) => {
 const fetchCompanyInfo = async (symbol, onCompany = true) => {
   try {
     if (onCompany) {
+      toggleBodySize();
       companyInfoWithChart.classList.add("d-none");
       spinnerCompany.classList.remove("d-none");
     }
@@ -158,6 +159,7 @@ exchange-dot-full-stack-course-services.ew.r.appspot.com/api/v3/company/profile/
     console.log(err);
   } finally {
     if (onCompany) {
+      toggleBodySize();
       companyInfoWithChart.classList.remove("d-none");
       spinnerCompany.classList.add("d-none");
     }

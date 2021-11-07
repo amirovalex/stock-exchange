@@ -2,7 +2,6 @@ body,
 html {
   box-sizing: border-box;
   margin: 0;
-  height: 100%;
   font-family: "Ubuntu Mono", monospace;
 }
 
@@ -54,6 +53,7 @@ html {
   display: flex;
   flex-direction: column;
   height: 100%;
+  overflow: hidden;
 }
 
 .results-list {
@@ -116,14 +116,6 @@ html {
   padding-top: 0;
 }
 
-@media screen and (min-width: 767px) {
-  /* start of medium tablet styles */
-  body,
-  #searchButton {
-    font-size: 1.2rem;
-  }
-}
-
 .companyInfo {
   display: flex;
   flex-direction: column;
@@ -180,4 +172,60 @@ ul a:visited {
 
 .flex-grow {
   flex-grow: 1;
+}
+
+.marquee {
+  overflow: hidden;
+  /* border-top: 1px solid #000;
+  border-bottom: 1px solid #000; */
+  display: flex;
+}
+
+.marquee h1{
+  /* font-size: 5em; */
+  white-space: nowrap;
+  text-transform: uppercase
+}
+
+/* #marqueeSpan {
+  padding: 1rem;
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#marqueeSpanContainer {
+  display: flex;
+  width: 400%;
+  /* animation: marquee 20s linear infinite; */
+} */
+
+.height-100 {
+  height: 100%;
+}
+
+/* @keyframes marquee {
+  0% {
+    left: 0;
+  }
+  100% {
+    left: -400%;
+  }
+}
+.animate {
+  position: relative;
+  /* animation: marquee 10s linear infinite; */
+} */
+
+@media screen and (min-width: 767px) {
+  /* start of medium tablet styles */
+  body,
+  #searchButton {
+    font-size: 1.2rem;
+  }
+}
+
+.stock-price {
+  color: #5df57a;
 }

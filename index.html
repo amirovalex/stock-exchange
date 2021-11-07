@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Stock Market</title>
+    <link rel="icon" type="image/png" href="./assets/logo.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -15,6 +16,12 @@
   </head>
   <body>
     <div class="pageContainer">
+      <!-- <div id="marqueeSpanContainer" class="animate">
+        <span id="marqueeSpan"> </span>
+      </div> -->
+      <div id="marquee" class="marquee">
+        <!-- <h1>Nepal * Himalayas * Mountains * Everest</h1> -->
+      </div>
       <div id="searchContainer">
         <input type="text" />
         <button id="searchButton">Search</button>
@@ -23,7 +30,10 @@
         <div id="loading" class="d-none"></div>
       </ul>
     </div>
+    <script src="./js/constants.js"></script>
+    <script src="./js/utils.js"></script>
     <script src="./js/company.js"></script>
     <script src="./js/index.js"></script>
+    <script src="./js/marquee.js"></script>
   </body>
 </html>

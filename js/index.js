@@ -15,11 +15,14 @@ const classChangesOnSearch = (useStart) => {
     if (resultsList.children.length > 1) {
       clearResults(resultsList.children.length);
     }
+    console.log(html, body);
+    toggleBodySize();
     resultsList.classList.remove("p-top-0");
     spinner.classList.remove("d-none");
     resultsList.classList.add("align-center");
     resultsList.classList.add("flex-grow");
   } else {
+    toggleBodySize();
     spinner.classList.add("d-none");
     resultsList.classList.remove("align-center");
     resultsList.classList.add("p-top-0");
