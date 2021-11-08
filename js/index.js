@@ -1,7 +1,7 @@
 // const urlParams = new URLSearchParams(window.location.search);
 const button = document.getElementById("searchButton");
 const input = document.getElementsByTagName("input")[0];
-const resultsList = document.getElementsByClassName("results-list")[0];
+// const resultsList = document.getElementsByClassName("results-list")[0];
 const spinner = document.getElementById("loading");
 
 const clearResults = (childrenNum) => {
@@ -15,14 +15,13 @@ const classChangesOnSearch = (useStart) => {
     if (resultsList.children.length > 1) {
       clearResults(resultsList.children.length);
     }
-    console.log(html, body);
-    toggleBodySize();
+    toggleSizeOnFetch(true);
     resultsList.classList.remove("p-top-0");
     spinner.classList.remove("d-none");
     resultsList.classList.add("align-center");
     resultsList.classList.add("flex-grow");
   } else {
-    toggleBodySize();
+    toggleSizeOnFetch(true);
     spinner.classList.add("d-none");
     resultsList.classList.remove("align-center");
     resultsList.classList.add("p-top-0");

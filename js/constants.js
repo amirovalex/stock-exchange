@@ -6,5 +6,6 @@ const apiKey = "382ad0a41ac45a1d469c77a49bb67935";
 const marquee = document.getElementsByClassName("marquee")[0];
 const html = document.getElementsByTagName("html")[0];
 const body = document.getElementsByTagName("body")[0];
+const resultsList = document.getElementsByClassName("results-list")[0];
 // document.getElementById("mydiv").offsetWidth;
 // export { button, input, resultsList, spinner };
