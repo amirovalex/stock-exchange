@@ -10,6 +10,7 @@ class SearchForm {
     searchButtonInner.innerText = "Search";
     this.searchButton.appendChild(searchButtonInner);
     this.formInput = document.createElement("input");
+    this.formInput.id = "input";
     this.formInput.type = "text";
     this.formDiv.appendChild(this.formInput);
     this.formDiv.appendChild(this.searchButton);

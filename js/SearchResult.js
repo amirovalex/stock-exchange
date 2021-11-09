@@ -19,6 +19,22 @@ class SearchResult {
     }
   }
 
+  highlight(text, indexOfTile) {
+    const inputText =
+      document.getElementsByClassName("stock-tile-name")[indexOfTile];
+    let innerHTML = inputText.innerHTML;
+    const index = innerHTML.indexOf(text);
+    if (index >= 0) {
+      innerHTML =
+        innerHTML.substring(0, index) +
+        "<span class='highlight'>" +
+        innerHTML.substring(index, index + text.length) +
+        "</span>" +
+        innerHTML.substring(index + text.length);
+      inputText.innerHTML = innerHTML;
+    }
+  }
+
   toggleSizeOnFetch(onIndex = false) {
     if (onIndex) {
       this.resultsList.classList.toggle("height-100");
@@ -67,15 +83,16 @@ class SearchResult {
 
   createListData(response) {
     try {
-      response.map(async (stock) => {
+      response.map(async (stock, indexOfTile) => {
         const listItem = document.createElement("a");
         listItem.href = `./company.html?symbol=${stock.symbol}`;
         listItem.classList.add("result-tile");
         let logoImage = this.checkIfImageExists(stock);
         listItem.appendChild(logoImage);
-        listItem.appendChild(
-          document.createTextNode(`${stock.name} (${stock.symbol})`)
-        );
+        const stockName = document.createElement("span");
+        stockName.innerText = `${stock.name} (${stock.symbol})`;
+        stockName.className = "stock-tile-name";
+        listItem.appendChild(stockName);
         if (Object.keys(stock.data).length !== 0) {
           const growthData = this.createGrowthToSearchItem(
             stock.data.profile.changesPercentage
@@ -83,6 +100,7 @@ class SearchResult {
           listItem.appendChild(growthData);
         }
         this.resultsList.appendChild(listItem);
+        this.highlight(document.getElementById("input").value, indexOfTile);
       });
     } catch (err) {
       console.log("ERRR", err);
