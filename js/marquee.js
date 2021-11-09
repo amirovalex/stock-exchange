@@ -75,7 +75,3 @@ class Marquee {
     }
   }
 }
-
-const marqueeDom = document.querySelector(".marquee");
-const newMarquee = new Marquee(marqueeDom);
-newMarquee.runMarquee();

@@ -15,20 +15,34 @@
     <link rel="stylesheet" href="./styles/styles.css" />
   </head>
   <body>
-    <div class="pageContainer">
-      <div id="marquee" class="marquee"></div>
-      <div id="searchContainer">
-        <input type="text" />
-        <button id="searchButton"><strong>Search</strong></button>
-      </div>
-      <ul class="results-list align-center p-top-0">
-        <div id="loading" class="d-none"></div>
-      </ul>
+    <div id="marquee" class="marquee"></div>
+    <h2>Search Nasdaq Stocks</h2>
+    <div id="searchContainer">
+      <div id="form"></div>
     </div>
+    <ul class="results-list align-center p-top-0"></ul>
     <script src="./js/constants.js"></script>
-    <script src="./js/utils.js"></script>
+    <!-- <script src="./js/utils.js"></script> -->
     <script src="./js/company.js"></script>
-    <script src="./js/index.js"></script>
-    <script src="./js/marquee.js"></script>
+    <script src="./js/Marquee.js"></script>
+    <script src="./js/SearchResult.js"></script>
+    <script src="./js/SearchForm.js"></script>
+    <script>
+      (async function () {
+        const marquee = new Marquee(document.querySelector(".marquee"));
+        marquee.runMarquee();
+        const results = new SearchResult(
+          document.getElementsByClassName("results-list")[0]
+        );
+        results.onInit();
+        const searchForm = new SearchForm(document.getElementById("form"));
+        searchForm.onInit(
+          results.createListData.bind(results),
+          results.toggleSizeOnFetch.bind(results),
+          results.classChangesOnSearch.bind(results)
+        );
+        // form.onSearch((companies) => results.renderResults(companies));
+      })();
+    </script>
   </body>
 </html>

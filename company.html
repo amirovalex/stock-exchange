@@ -38,8 +38,22 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="js/constants.js"></script>
-    <script src="js/utils.js"></script>
+    <script src="js/Marquee.js"></script>
+    <script src="./js/SearchResult.js"></script>
+    <script src="./js/SearchForm.js"></script>
+    <script>
+      const marquee = new Marquee(document.querySelector(".marquee"));
+      marquee.runMarquee();
+      const results = new SearchResult();
+
+      const searchForm = new SearchForm();
+      searchForm.onInit(
+        results.createListData.bind(results),
+        results.toggleSizeOnFetch.bind(results),
+        results.classChangesOnSearch.bind(results),
+        true
+      );
+    </script>
     <script src="js/company.js"></script>
-    <script src="js/marquee.js"></script>
   </body>
 </html>

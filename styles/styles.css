@@ -5,6 +5,20 @@ html {
   font-family: "Ubuntu Mono", monospace;
 }
 
+html {
+  background: rgb(238, 174, 202);
+  background: radial-gradient(
+    circle,
+    rgba(238, 174, 202, 0.5) 0%,
+    rgba(148, 187, 233, 0.5) 100%
+  );
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
 *,
 *:before,
 *:after {
@@ -32,9 +46,10 @@ html {
   border-color: #c169f5;
 }
 
-#searchContainer input:hover {
+#form input:hover {
   border-color: #af44ee;
-  /* box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px; */
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
 
 #searchButton {
@@ -48,14 +63,8 @@ html {
 
 #searchButton:hover {
   cursor: pointer;
-  /* box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px; */
-}
-
-.pageContainer {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  overflow: hidden;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
 
 .results-list {
@@ -70,7 +79,6 @@ html {
   padding: 1rem;
   list-style-type: none;
   text-decoration: none;
-  /* border-bottom: 1px solid #000; */
   display: flex;
   align-items: center;
 }
@@ -128,7 +136,7 @@ html {
   align-items: center;
 }
 
-.companyInfo * {
+.companyInfo > * {
   margin: 1rem;
 }
 
@@ -158,7 +166,8 @@ ul a:link {
 }
 
 ul a:hover {
-  /* box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px; */
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
 ul a:visited {
   color: #c069f5;
@@ -198,14 +207,51 @@ ul a:visited {
   height: 100%;
 }
 
+h2 {
+  text-align: center;
+}
+
 @media screen and (min-width: 767px) {
   /* start of medium tablet styles */
   body,
   #searchButton {
     font-size: 1.2rem;
   }
+
+  #nav > a {
+    padding: 1.2rem;
+  }
 }
 
 .stock-price {
   color: #5df57a;
+}
+
+#marquee {
+  background-color: #fff;
+  border-bottom: 5px solid #c069f5;
+}
+
+.padding-bottom-1 {
+  padding-bottom: 1rem;
+}
+
+.companyPrice {
+  background: #fff;
+  padding: 1rem;
+  border: 5px solid #c069f5;
+  border-radius: 5px;
+  box-shadow: rgb(60 64 67 / 30%) 0px 1px 2px 0px,
+    rgb(60 64 67 / 15%) 0px 2px 6px 2px;
+}
+
+#form {
+  display: flex;
+  justify-content: center;
+  width: 70%;
+}
+
+.companyLink:hover {
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
