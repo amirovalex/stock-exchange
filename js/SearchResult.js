@@ -20,19 +20,16 @@ class SearchResult {
   }
 
   highlight(text, indexOfTile) {
-    const inputText =
+    const inputLinkDom =
       document.getElementsByClassName("stock-tile-name")[indexOfTile];
-    let innerHTML = inputText.innerHTML;
-    const index = innerHTML.indexOf(text);
-    if (index >= 0) {
-      innerHTML =
-        innerHTML.substring(0, index) +
-        "<span class='highlight'>" +
-        innerHTML.substring(index, index + text.length) +
-        "</span>" +
-        innerHTML.substring(index + text.length);
-      inputText.innerHTML = innerHTML;
-    }
+    const inputLinkHTML = inputLinkDom.innerHTML;
+    const replacedHTML = inputLinkHTML.replace(
+      new RegExp(text, "gi"),
+      (match) => {
+        return `<span class='highlight'>${match}</span>`;
+      }
+    );
+    inputLinkDom.innerHTML = replacedHTML;
   }
 
   toggleSizeOnFetch(onIndex = false) {
